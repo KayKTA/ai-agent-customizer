@@ -17,7 +17,7 @@ import { useAgentStore } from "@/store/agentStore";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 import { MessageRounded } from "@mui/icons-material";
-import AgentInsightsCard from "@/components/agent/AgentInsightCard";
+import AgentInsightsCard from "@/components/agent/AgentInsightsCard";
 import HeroSection from "@/components/layout/HeroSection";
 
 export default function HomePage() {
