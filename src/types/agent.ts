@@ -9,6 +9,14 @@ import {
   AVAILABLE_DOMAINS,
 } from "@/config/agentConfig";
 
+export const DEFAULT_AGENT_CONFIG: AgentConfig = {
+  name: "",
+  role: "",
+  tone: "friendly",
+  level: "mid",
+  domains: [],
+  extraInstructions: "",
+};
 
 export const agentConfigSchema = z.object({
   name: z.string().min(1, "Required"),
