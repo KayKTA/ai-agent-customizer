@@ -4,8 +4,6 @@ import {
     Box,
     Container,
     Grid,
-    Stack,
-    Typography,
     IconButton,
     Tooltip,
 } from "@mui/material";
@@ -30,64 +28,36 @@ export default function HomePage() {
     return (
         <>
             <HeroSection onScrollToConfig={scrollToConfig} />
-            <Container
-                maxWidth="lg"
-                sx={{
-                    py: 4,
-                    pb: 6,
-                    position: "relative",
-                    "&::before": {
-                        content: '""',
-                        position: "fixed",
-                        inset: 0,
-                        background:
-                            "radial-gradient(circle at top, rgba(168,85,247,0.16), transparent 60%)",
-                        pointerEvents: "none",
-                        zIndex: -1,
-                    },
-                }}
+            <Container maxWidth="xl" sx={{ py: 6 }}>
+                <Box sx={{ mb: 4 }} id="agent-config">
+                    <SectionCard
+                        icon={<SettingsSuggestIcon />}
+                        title="Configuration de l’agent"
+                        subtitle="Définis rapidement l’identité, le style et le périmètre de ton agent IA."
+                    >
+                        <AgentConfigForm />
+                    </SectionCard>
+                </Box>
 
-            >
-                {/* MAIN GRID */}
-                <Grid container spacing={3} id="agent-config">
-                    {/* left column: agent config */}
-                    <Grid size={{ xs: 12, md: 4 }}>
-                        <SectionCard
-                            title="Configuration de l'agent"
-                            subtitle="Personnalisez la personnalité et le comportement de votre agent IA."
-                            icon={<SettingsSuggestIcon />}
-                            sx={{
-                                // position: { md: "sticky" },
-                                // top: { md: 24 },
-                                bgcolor: "background.default",
-                                boxShadow: 4,
-                                borderColor: "rgba(148,163,184,0.5)",
-                            }}
-                        >
-                            <AgentConfigForm />
-                        </SectionCard>
+                <Grid container spacing={3}>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <AgentInsightsCard />
                     </Grid>
-
-                    {/* right column: prompt preview + chat */}
-                    <Grid size={{ xs: 12, md: 8 }}>
-                        <Stack spacing={3}>
-                            <AgentInsightsCard />
-
-                            <SectionCard
-                                title="Playground"
-                                subtitle="Teste l'agent avec de vraies questions."
-                                icon={<MessageRounded />}
-                                action={
-                                    <Tooltip title="Réinitialiser la conversation">
-                                        <IconButton size="small" onClick={resetChat}>
-                                            <RestartAltIcon fontSize="small" />
-                                        </IconButton>
-                                    </Tooltip>
-                                }
-                            >
-                                <ChatWindow />
-                            </SectionCard>
-                        </Stack>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <SectionCard
+                            title="Playground"
+                            subtitle="Teste l'agent avec de vraies questions."
+                            icon={<MessageRounded />}
+                            action={
+                                <Tooltip title="Réinitialiser la conversation">
+                                    <IconButton size="small" onClick={resetChat}>
+                                        <RestartAltIcon fontSize="small" />
+                                    </IconButton>
+                                </Tooltip>
+                            }
+                        >
+                            <ChatWindow />
+                        </SectionCard>
                     </Grid>
                 </Grid>
             </Container>

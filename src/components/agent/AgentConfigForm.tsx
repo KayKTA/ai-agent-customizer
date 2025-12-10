@@ -16,7 +16,12 @@ import {
 import { useAgentConfig } from "@/hooks/useAgentConfig";
 import ToneSelector from "@/components/agent/ToneSelector";
 import LevelSelector from "@/components/agent/LevelSelector";
-import { AVAILABLE_DOMAINS, Domain, DOMAIN_LABELS_FR } from "@/config/agentConfig";
+import {
+    AVAILABLE_DOMAINS,
+    Domain,
+    DOMAIN_LABELS_FR,
+} from "@/config/agentConfig";
+import { color } from "framer-motion";
 
 export default function AgentConfigForm() {
     const { config, updateAgentConfig } = useAgentConfig();
@@ -40,64 +45,78 @@ export default function AgentConfigForm() {
         updateAgentConfig({ extraInstructions: e.target.value });
     };
 
+    const columnTitleSx = {
+        mb: 1.5,
+        display: "block",
+        textTransform: "uppercase",
+        letterSpacing: 0.8,
+        fontSize: 12,
+        fontWeight: 600,
+        opacity: 0.8,
+        color: "text.primary",
+    } as const;
+
+    const columnBoxBase = {
+        pb: 1,
+    } as const;
+
+    const columnWithSeparator = {
+        ...columnBoxBase,
+        borderLeft: {
+            xs: "none",
+            md: "1px solid rgba(255,255,255,0.07)",
+        },
+        pl: {
+            xs: 0,
+            md: 3,
+        },
+    } as const;
+
     return (
-        <Box display="flex" flexDirection="column" gap={3}>
-            {/* Identité */}
-            <Box>
-                <Typography variant="subtitle2" sx={{ mb: 1, opacity: 0.7 }}>
+        <Box
+            sx={{
+                display: "grid",
+                gap: 3,
+                gridTemplateColumns: {
+                    xs: "1fr",
+                    md: "0.8fr 1fr 1.2fr", // Identity | Domains & Rules | Style
+                },
+            }}
+        >
+            {/* Col 1 : Identity */}
+            <Box sx={columnBoxBase}>
+                <Typography variant="overline" sx={columnTitleSx}>
                     Identité
                 </Typography>
+
                 <TextField
-                    label="Nom de l’agent"
+                    label="Nom"
                     fullWidth
                     size="small"
                     value={config.name}
                     onChange={handleNameChange}
                     sx={{ mb: 2 }}
                 />
+
                 <TextField
                     label="Rôle / persona"
                     fullWidth
                     size="small"
                     value={config.role}
                     onChange={handleRoleChange}
-                    helperText="Exemples : Coach Agile, Mentor Data junior, Assistant support IT..."
+                    helperText="Ex : Custom AI Agent, Coach Agile, Mentor Data..."
                 />
             </Box>
 
-            {/* Style */}
-            <Box>
-                <Typography variant="subtitle2" sx={{ mb: 1, opacity: 0.7 }}>
-                    Style de l’agent
+
+
+            {/* Col 2 : Domains & Rules */}
+            <Box sx={columnWithSeparator}>
+                <Typography variant="overline" sx={columnTitleSx}>
+                    Domaines & règles
                 </Typography>
 
-                <Box sx={{ mb: 2 }}>
-                    <Typography variant="body2" sx={{ mb: 1, opacity: 0.8 }}>
-                        Ton de l’agent
-                    </Typography>
-                    <ToneSelector
-                        value={config.tone}
-                        onChange={(tone) => updateAgentConfig({ tone })}
-                    />
-                </Box>
-
-                <Box>
-                    <Typography variant="body2" sx={{ mb: 1, opacity: 0.8 }}>
-                        Niveau d’expertise
-                    </Typography>
-                    <LevelSelector
-                        value={config.level}
-                        onChange={(level) => updateAgentConfig({ level })}
-                    />
-                </Box>
-            </Box>
-
-            {/* Domaines */}
-            <Box>
-                <Typography variant="subtitle2" sx={{ mb: 1, opacity: 0.7 }}>
-                    Domaines de compétence
-                </Typography>
-                <FormControl fullWidth size="small">
+                <FormControl fullWidth size="small" sx={{ mb: 2 }}>
                     <InputLabel id="agent-domains-label">Domaines</InputLabel>
                     <Select
                         labelId="agent-domains-label"
@@ -131,16 +150,10 @@ export default function AgentConfigForm() {
                         ))}
                     </Select>
                 </FormControl>
-            </Box>
 
-            {/* Règles supplémentaires */}
-            <Box>
-                <Typography variant="subtitle2" sx={{ mb: 1, opacity: 0.7 }}>
-                    Règles et instructions
-                </Typography>
                 <TextField
                     label="Instructions supplémentaires"
-                    placeholder="Exemples : Réponds toujours en français. Ne donne jamais de conseils médicaux. Donne systématiquement 3 exemples concrets..."
+                    placeholder="Ex : Réponds toujours en français, reste concise, donne 1 exemple concret..."
                     fullWidth
                     size="small"
                     multiline
@@ -148,6 +161,33 @@ export default function AgentConfigForm() {
                     value={config.extraInstructions}
                     onChange={handleExtraInstructionsChange}
                 />
+            </Box>
+
+              {/* Col 3 : Style */}
+            <Box sx={columnWithSeparator}>
+                <Typography variant="overline" sx={columnTitleSx}>
+                    Style
+                </Typography>
+
+                <Box sx={{ mb: 2 }}>
+                    <Typography variant="body2" sx={{ mb: 1, opacity: 0.8 }}>
+                        Ton
+                    </Typography>
+                    <ToneSelector
+                        value={config.tone}
+                        onChange={(tone) => updateAgentConfig({ tone })}
+                    />
+                </Box>
+
+                <Box>
+                    <Typography variant="body2" sx={{ mb: 1, opacity: 0.8 }}>
+                        Niveau d’expertise
+                    </Typography>
+                    <LevelSelector
+                        value={config.level}
+                        onChange={(level) => updateAgentConfig({ level })}
+                    />
+                </Box>
             </Box>
         </Box>
     );

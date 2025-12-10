@@ -54,7 +54,7 @@ export default function AgentInsightsCard() {
                         Aperçu de l’agent
                     </Typography>
                     <Typography variant="body2" sx={{ opacity: 0.7 }}>
-                        Prompt système & résumé générés à partir de la configuration.
+                        Prompt système auto générés.
                     </Typography>
                 </Box>
             </Box>

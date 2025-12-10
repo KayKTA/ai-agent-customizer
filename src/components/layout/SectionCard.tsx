@@ -30,6 +30,7 @@ export default function SectionCard({
                 border: "1px solid",
                 borderColor: "divider",
                 bgcolor: "background.paper",
+                borderRadius: 2,
                 ...sx,
             }}
         >
