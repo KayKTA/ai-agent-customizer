@@ -6,7 +6,7 @@ import { Box, Paper, Typography } from "@mui/material";
 type SectionCardProps = {
     title: string;
     subtitle?: string;
-    icon?: ReactNode;   // 🆕 icône à afficher à gauche du title
+    icon?: ReactNode;   // icon displayed next to the title
     action?: ReactNode;
     children: ReactNode;
 };

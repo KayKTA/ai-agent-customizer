@@ -8,26 +8,33 @@ type Props = {
     onChange: (tone: (typeof tones)[number]) => void;
 };
 
+const TONE_LABELS: Record<(typeof tones)[number], string> = {
+    friendly: "Amical",
+    professional: "Professionnel",
+    empathetic: "Empathique",
+    direct: "Direct",
+    playful: "Ludique",
+};
+
 export default function ToneSelector({ value, onChange }: Props) {
     return (
         <Box
             sx={{
                 display: "flex",
                 flexWrap: "wrap",
-                gap: "8px",                // space between chips
-                rowGap: "8px",             // space between rows
+                gap: "8px",
+                rowGap: "8px",
             }}
         >
             {tones.map((tone) => (
                 <Chip
                     key={tone}
-                    label={tone}
+                    label={TONE_LABELS[tone]}
                     color={tone === value ? "primary" : "default"}
                     onClick={() => onChange(tone)}
                     sx={{
-                        textTransform: "capitalize",
+                        textTransform: "none",
                         cursor: "pointer",
-                        m: 0, // reset margin to use gap instead
                     }}
                 />
             ))}

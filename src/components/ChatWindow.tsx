@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import {
     Box,
     TextField,
@@ -11,12 +11,14 @@ import {
 import SendIcon from "@mui/icons-material/Send";
 import { useAgentStore } from "@/store/agentStore";
 import { useAgentChat } from "@/hooks/useAgentChat";
-import MessageBubble from "./MessageBubble";
+import MessageBubble from "@/components/MessageBubble";
 
 export default function ChatWindow() {
     const { messages } = useAgentStore();
     const { sendMessage, loading } = useAgentChat();
     const [input, setInput] = useState("");
+
+    const listRef = useRef<HTMLUListElement | null>(null);
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -25,9 +27,17 @@ export default function ChatWindow() {
         setInput("");
     };
 
+    // auto-scroll to bottom on new message
+    useEffect(() => {
+        const listEl = listRef.current;
+        if (!listEl) return;
+        listEl.scrollTop = listEl.scrollHeight;
+    }, [messages]);
+
     return (
         <Box display="flex" flexDirection="column" height={360}>
             <List
+                ref={listRef}
                 sx={{
                     flex: 1,
                     overflow: "auto",
@@ -35,13 +45,13 @@ export default function ChatWindow() {
                     display: "flex",
                     flexDirection: "column",
                     gap: 1,
+                    pr: 0.5,
                 }}
             >
                 {messages.map((m) => (
                     <MessageBubble key={m.id} text={m.text} from={m.from} />
                 ))}
             </List>
-
 
             <Box
                 component="form"
@@ -53,7 +63,7 @@ export default function ChatWindow() {
                 <TextField
                     size="small"
                     fullWidth
-                    placeholder="Ask your agent something..."
+                    placeholder="Pose une question à ton agent..."
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                 />
