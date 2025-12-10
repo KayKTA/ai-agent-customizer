@@ -10,9 +10,13 @@ import {
     OutlinedInput,
     Checkbox,
     ListItemText,
+    Divider,
+    Typography
 } from "@mui/material";
 import { useAgentConfig } from "@/hooks/useAgentConfig";
 import { levels, tones } from "@/types/agent";
+import ToneSelector from "@/components/ToneSelector";
+import LevelSelector from "@/components/LevelSelector";
 
 const AVAILABLE_DOMAINS = [
     "general",
@@ -27,7 +31,10 @@ export default function AgentConfigForm() {
     const { config, updateAgentConfig } = useAgentConfig();
 
     return (
-        <Box component="form" display="flex" flexDirection="column" gap={2}>
+        <Box component="form" display="flex" flexDirection="column" gap={3}>
+            <Typography variant="subtitle2" sx={{ mb: 1, opacity: 0.7 }}>
+                Identity
+            </Typography>
             <TextField
                 label="Agent name"
                 value={config.name}
@@ -41,42 +48,29 @@ export default function AgentConfigForm() {
                 onChange={(e) => updateAgentConfig({ role: e.target.value })}
                 fullWidth
                 placeholder="Ex: Senior AI coach for developers..."
+                sx={{ mt: 2 }}
             />
-
-            <FormControl fullWidth>
-                <InputLabel>Tone</InputLabel>
-                <Select
-                    label="Tone"
+            <Divider textAlign="left">Style</Divider>
+            <Box>
+                <Typography variant="body2" sx={{ mb: 1, opacity: 0.7 }}>
+                    Tone
+                </Typography>
+                <ToneSelector
                     value={config.tone}
-                    onChange={(e) =>
-                        updateAgentConfig({ tone: e.target.value as (typeof tones)[number] })
-                    }
-                >
-                    {tones.map((tone) => (
-                        <MenuItem key={tone} value={tone}>
-                            {tone}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
+                    onChange={(tone) => updateAgentConfig({ tone })}
+                />
+            </Box>
 
-            <FormControl fullWidth>
-                <InputLabel>Expertise level</InputLabel>
-                <Select
-                    label="Expertise level"
+            <Box>
+                <Typography variant="body2" sx={{ mb: 1, opacity: 0.7 }}>
+                    Expertise level
+                </Typography>
+                <LevelSelector
                     value={config.level}
-                    onChange={(e) =>
-                        updateAgentConfig({ level: e.target.value as (typeof levels)[number] })
-                    }
-                >
-                    {levels.map((lvl) => (
-                        <MenuItem key={lvl} value={lvl}>
-                            {lvl}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-
+                    onChange={(level) => updateAgentConfig({ level })}
+                />
+            </Box>
+            <Divider textAlign="left">Scope</Divider>
             <FormControl fullWidth>
                 <InputLabel>Domains</InputLabel>
                 <Select
@@ -101,7 +95,7 @@ export default function AgentConfigForm() {
                     ))}
                 </Select>
             </FormControl>
-
+            <Divider textAlign="left">Rules</Divider>
             <TextField
                 label="Extra instructions"
                 value={config.extraInstructions ?? ""}

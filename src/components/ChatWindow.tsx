@@ -6,13 +6,12 @@ import {
     TextField,
     IconButton,
     List,
-    ListItem,
-    ListItemText,
     CircularProgress,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useAgentStore } from "@/store/agentStore";
 import { useAgentChat } from "@/hooks/useAgentChat";
+import MessageBubble from "./MessageBubble";
 
 export default function ChatWindow() {
     const { messages } = useAgentStore();
@@ -33,28 +32,16 @@ export default function ChatWindow() {
                     flex: 1,
                     overflow: "auto",
                     mb: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 1,
                 }}
             >
                 {messages.map((m) => (
-                    <ListItem
-                        key={m.id}
-                        sx={{
-                            justifyContent: m.from === "user" ? "flex-end" : "flex-start",
-                        }}
-                    >
-                        <ListItemText
-                            primary={m.text}
-                            sx={{
-                                maxWidth: "75%",
-                                p: 1,
-                                borderRadius: 2,
-                                bgcolor:
-                                    m.from === "user" ? "primary.main" : "background.default",
-                            }}
-                        />
-                    </ListItem>
+                    <MessageBubble key={m.id} text={m.text} from={m.from} />
                 ))}
             </List>
+
 
             <Box
                 component="form"

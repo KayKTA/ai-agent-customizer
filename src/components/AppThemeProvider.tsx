@@ -6,18 +6,20 @@ import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 const theme = createTheme({
     palette: {
         mode: "dark",
-        primary: {
-            main: "#fdd835",
-        },
+        primary: { main: "#fdd835" },
         background: {
-            default: "#0b0b10",
-            paper: "#14141f",
+            default: "#050510",
+            paper: "#11111c",
         },
     },
     shape: {
-        borderRadius: 12,
+        borderRadius: 6,
+    },
+    typography: {
+        fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
     },
 });
+
 
 type Props = {
     children: ReactNode;
