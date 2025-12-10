@@ -2,11 +2,11 @@
 
 import { useMemo } from "react";
 import { Box } from "@mui/material";
-import { useAgentStore } from "@/store/agentStore";
+import { useAgentConfig } from "@/hooks/useAgentConfig";
 import { buildSystemPrompt } from "@/lib/prompt";
 
 export default function PromptPreview() {
-    const { config } = useAgentStore();
+    const { config } = useAgentConfig();
 
     const prompt = useMemo(() => buildSystemPrompt(config), [config]);
 

@@ -11,7 +11,7 @@ import {
     Checkbox,
     ListItemText,
 } from "@mui/material";
-import { useAgentStore } from "@/store/agentStore";
+import { useAgentConfig } from "@/hooks/useAgentConfig";
 import { levels, tones } from "@/types/agent";
 
 const AVAILABLE_DOMAINS = [
@@ -24,21 +24,21 @@ const AVAILABLE_DOMAINS = [
 ];
 
 export default function AgentConfigForm() {
-    const { config, setConfig } = useAgentStore();
+    const { config, updateAgentConfig } = useAgentConfig();
 
     return (
         <Box component="form" display="flex" flexDirection="column" gap={2}>
             <TextField
                 label="Agent name"
                 value={config.name}
-                onChange={(e) => setConfig({ name: e.target.value })}
+                onChange={(e) => updateAgentConfig({ name: e.target.value })}
                 fullWidth
             />
 
             <TextField
                 label="Role / persona"
                 value={config.role}
-                onChange={(e) => setConfig({ role: e.target.value })}
+                onChange={(e) => updateAgentConfig({ role: e.target.value })}
                 fullWidth
                 placeholder="Ex: Senior AI coach for developers..."
             />
@@ -49,7 +49,7 @@ export default function AgentConfigForm() {
                     label="Tone"
                     value={config.tone}
                     onChange={(e) =>
-                        setConfig({ tone: e.target.value as (typeof tones)[number] })
+                        updateAgentConfig({ tone: e.target.value as (typeof tones)[number] })
                     }
                 >
                     {tones.map((tone) => (
@@ -66,7 +66,7 @@ export default function AgentConfigForm() {
                     label="Expertise level"
                     value={config.level}
                     onChange={(e) =>
-                        setConfig({ level: e.target.value as (typeof levels)[number] })
+                        updateAgentConfig({ level: e.target.value as (typeof levels)[number] })
                     }
                 >
                     {levels.map((lvl) => (
@@ -83,7 +83,7 @@ export default function AgentConfigForm() {
                     multiple
                     value={config.domains}
                     onChange={(e) =>
-                        setConfig({
+                        updateAgentConfig({
                             domains:
                                 typeof e.target.value === "string"
                                     ? e.target.value.split(",")
@@ -105,7 +105,7 @@ export default function AgentConfigForm() {
             <TextField
                 label="Extra instructions"
                 value={config.extraInstructions ?? ""}
-                onChange={(e) => setConfig({ extraInstructions: e.target.value })}
+                onChange={(e) => updateAgentConfig({ extraInstructions: e.target.value })}
                 fullWidth
                 multiline
                 minRows={3}

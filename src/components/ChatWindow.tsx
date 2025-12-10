@@ -12,44 +12,18 @@ import {
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useAgentStore } from "@/store/agentStore";
+import { useAgentChat } from "@/hooks/useAgentChat";
 
 export default function ChatWindow() {
-    const { config, messages, addMessage, resetChat } = useAgentStore();
+    const { messages } = useAgentStore();
+    const { sendMessage, loading } = useAgentChat();
     const [input, setInput] = useState("");
-    const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async (e: FormEvent) => {
+    const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        const trimmed = input.trim();
-        if (!trimmed || loading) return;
-
-        addMessage("user", trimmed);
+        if (!input.trim()) return;
+        sendMessage(input);
         setInput("");
-        setLoading(true);
-
-        try {
-            const res = await fetch("/api/agent-chat", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    config,
-                    message: trimmed,
-                }),
-            });
-
-            const data = await res.json();
-
-            if (data.reply) {
-                addMessage("agent", data.reply);
-            } else {
-                addMessage("agent", "⚠️ Error: no reply from the AI.");
-            }
-        } catch (err) {
-            console.error(err);
-            addMessage("agent", "⚠️ Error calling the AI API.");
-        } finally {
-            setLoading(false);
-        }
     };
 
     return (
