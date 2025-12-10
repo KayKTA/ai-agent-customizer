@@ -2,8 +2,6 @@
 
 import {
     Box,
-    Button,
-    Chip,
     Container,
     Grid,
     Stack,
@@ -11,156 +9,88 @@ import {
     IconButton,
     Tooltip,
 } from "@mui/material";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { useMemo, useState } from "react";
 
-import AgentConfigForm from "@/components/AgentConfigForm";
-import PromptPreview from "@/components/PromptPreview";
-import ChatWindow from "@/components/ChatWindow";
-import SectionCard from "@/components/SectionCard";
-import AgentInsightsTabs from "@/components/AgentInsightsTabs";
-import { useAgentConfig } from "@/hooks/useAgentConfig";
-import { buildSystemPrompt } from "@/lib/prompt";
+import AgentConfigForm from "@/components/agent/AgentConfigForm";
+import ChatWindow from "@/components/chat/ChatWindow";
+import SectionCard from "@/components/layout/SectionCard";
 import { useAgentStore } from "@/store/agentStore";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
-import TerminalIcon from "@mui/icons-material/Terminal";
-import ChatIcon from "@mui/icons-material/Chat";
-import { InfoOutlineRounded, MessageRounded } from "@mui/icons-material";
-import AgentSummary from "@/components/AgentSummary";
-import AgentExamples from "@/components/AgentExamples";
+import { MessageRounded } from "@mui/icons-material";
+import AgentInsightsCard from "@/components/agent/AgentInsightCard";
+import HeroSection from "@/components/layout/HeroSection";
 
 export default function HomePage() {
-    const { config } = useAgentConfig();
-    const systemPrompt = useMemo(() => buildSystemPrompt(config), [config]);
-
-    const [copied, setCopied] = useState(false);
     const { resetChat } = useAgentStore();
 
-    const handleCopyPrompt = async () => {
-        try {
-            await navigator.clipboard.writeText(systemPrompt);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 1500);
-        } catch (e) {
-            console.error("Failed to copy prompt", e);
-        }
+    const scrollToConfig = () => {
+        const el = document.getElementById("agent-config");
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     };
     return (
-        <Container
-            maxWidth="lg"
-            sx={{
-                py: 4,
-                pb: 6,
-                position: "relative",
-                "&::before": {
-                    content: '""',
-                    position: "fixed",
-                    inset: 0,
-                    background:
-                        "radial-gradient(circle at top, rgba(168,85,247,0.16), transparent 60%)",
-                    pointerEvents: "none",
-                    zIndex: -1,
-                },
-            }}
-
-        >
-            {/* HERO */}
-            <Box
+        <>
+            <HeroSection onScrollToConfig={scrollToConfig} />
+            <Container
+                maxWidth="lg"
                 sx={{
-                    mb: 4,
-                    borderRadius: 6,
-                    px: { xs: 3, md: 5 },
-                    py: { xs: 4, md: 6 },
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 3,
-                    border: "1px solid",
-                    borderColor: "divider",
-                    background: "linear-gradient(135deg, #0b0b14 0%, #10102a 100%)",
+                    py: 4,
+                    pb: 6,
+                    position: "relative",
+                    "&::before": {
+                        content: '""',
+                        position: "fixed",
+                        inset: 0,
+                        background:
+                            "radial-gradient(circle at top, rgba(168,85,247,0.16), transparent 60%)",
+                        pointerEvents: "none",
+                        zIndex: -1,
+                    },
                 }}
+
             >
-                <Typography
-                    variant="overline"
-                    sx={{ letterSpacing: 1.5, opacity: 0.6 }}
-                >
-                    Générateur d’Agent IA
-                </Typography>
-
-                <Typography
-                    variant="h3"
-                    sx={{
-                        fontWeight: 700,
-                        lineHeight: 1.15,
-                        maxWidth: "650px",
-                    }}
-                >
-                    Créez, configurez et testez votre propre{" "}
-                    <Box component="span" sx={{ color: "primary.main" }}>
-                        agent conversationnel
-                    </Box>{" "}
-                    en quelques minutes
-                </Typography>
-
-                <Typography variant="body1" sx={{ opacity: 0.85, maxWidth: 600 }}>
-                    Définissez la personnalité, le ton, le niveau d’expertise et les règles
-                    comportementales de votre agent. Visualisez son prompt système, testez ses
-                    réponses et obtenez un aperçu clair de son rôle dans votre application.
-                </Typography>
-
-            </Box>
-
-
-
-            {/* MAIN GRID */}
-            <Grid container spacing={3}>
-                {/* left column: agent config */}
-                <Grid size={{ xs: 12, md: 4 }}>
-                    <SectionCard
-                        title="Agent setup"
-                        subtitle="Définis la personnalité, le ton et le scope de ton agent IA."
-                        icon={<SettingsSuggestIcon />}
-                    >
-                        <AgentConfigForm />
-                    </SectionCard>
-                </Grid>
-
-                {/* right column: prompt preview + chat */}
-                <Grid size={{ xs: 12, md: 8 }}>
-                    <Stack spacing={3}>
+                {/* MAIN GRID */}
+                <Grid container spacing={3} id="agent-config">
+                    {/* left column: agent config */}
+                    <Grid size={{ xs: 12, md: 4 }}>
                         <SectionCard
-                            title="Aperçu de l’agent"
-                            subtitle="Prompt système, résumé et exemple de réponse."
-                            icon={<TerminalIcon />}
-                            action={
-                                <Tooltip title={copied ? "Copié !" : "Copier le prompt"}>
-                                    <IconButton size="small" onClick={handleCopyPrompt}>
-                                        <ContentCopyIcon fontSize="small" />
-                                    </IconButton>
-                                </Tooltip>
-                            }
+                            title="Configuration de l'agent"
+                            subtitle="Personnalisez la personnalité et le comportement de votre agent IA."
+                            icon={<SettingsSuggestIcon />}
+                            sx={{
+                                // position: { md: "sticky" },
+                                // top: { md: 24 },
+                                bgcolor: "background.default",
+                                boxShadow: 4,
+                                borderColor: "rgba(148,163,184,0.5)",
+                            }}
                         >
-                            <AgentInsightsTabs />
+                            <AgentConfigForm />
                         </SectionCard>
+                    </Grid>
 
-                        <SectionCard
-                            title="Playground"
-                            subtitle="Teste l’agent avec de vraies questions."
-                            icon={<MessageRounded />}
-                            action={
-                                <Tooltip title="Réinitialiser la conversation">
-                                    <IconButton size="small" onClick={resetChat}>
-                                        <RestartAltIcon fontSize="small" />
-                                    </IconButton>
-                                </Tooltip>
-                            }
-                        >
-                            <ChatWindow />
-                        </SectionCard>
-                    </Stack>
+                    {/* right column: prompt preview + chat */}
+                    <Grid size={{ xs: 12, md: 8 }}>
+                        <Stack spacing={3}>
+                            <AgentInsightsCard />
+
+                            <SectionCard
+                                title="Playground"
+                                subtitle="Teste l'agent avec de vraies questions."
+                                icon={<MessageRounded />}
+                                action={
+                                    <Tooltip title="Réinitialiser la conversation">
+                                        <IconButton size="small" onClick={resetChat}>
+                                            <RestartAltIcon fontSize="small" />
+                                        </IconButton>
+                                    </Tooltip>
+                                }
+                            >
+                                <ChatWindow />
+                            </SectionCard>
+                        </Stack>
+                    </Grid>
                 </Grid>
-
-            </Grid>
-        </Container>
+            </Container>
+        </>
     );
 }
