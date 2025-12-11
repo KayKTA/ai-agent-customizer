@@ -22,6 +22,8 @@ import {
     DOMAIN_LABELS_FR,
 } from "@/config/agentConfig";
 import { color } from "framer-motion";
+import { SettingsSuggest } from "@mui/icons-material";
+import SectionCard from "../layout/SectionCard";
 
 export default function AgentConfigForm() {
     const { config, updateAgentConfig } = useAgentConfig();
@@ -73,122 +75,129 @@ export default function AgentConfigForm() {
     } as const;
 
     return (
-        <Box
-            sx={{
-                display: "grid",
-                gap: 3,
-                gridTemplateColumns: {
-                    xs: "1fr",
-                    md: "0.8fr 1fr 1.2fr", // Identity | Domains & Rules | Style
-                },
-            }}
+        <SectionCard
+            icon={<SettingsSuggest />}
+            title="Configuration de l’agent"
+            subtitle="Définis rapidement l’identité, le style et le périmètre de ton agent IA."
         >
-            {/* Col 1 : Identity */}
-            <Box sx={columnBoxBase}>
-                <Typography variant="overline" sx={columnTitleSx}>
-                    Identité
-                </Typography>
 
-                <TextField
-                    label="Nom"
-                    fullWidth
-                    size="small"
-                    value={config.name}
-                    onChange={handleNameChange}
-                    sx={{ mb: 2 }}
-                />
-
-                <TextField
-                    label="Rôle / persona"
-                    fullWidth
-                    size="small"
-                    value={config.role}
-                    onChange={handleRoleChange}
-                    helperText="Ex : Custom AI Agent, Coach Agile, Mentor Data..."
-                />
-            </Box>
-
-
-
-            {/* Col 2 : Domains & Rules */}
-            <Box sx={columnWithSeparator}>
-                <Typography variant="overline" sx={columnTitleSx}>
-                    Domaines & règles
-                </Typography>
-
-                <FormControl fullWidth size="small" sx={{ mb: 2 }}>
-                    <InputLabel id="agent-domains-label">Domaines</InputLabel>
-                    <Select
-                        labelId="agent-domains-label"
-                        multiple
-                        value={config.domains}
-                        onChange={handleDomainsChange}
-                        input={<OutlinedInput label="Domaines" />}
-                        renderValue={(selected) => (
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexWrap: "wrap",
-                                    gap: "6px",
-                                    rowGap: "6px",
-                                }}
-                            >
-                                {selected.map((value) => (
-                                    <Chip
-                                        key={value}
-                                        label={DOMAIN_LABELS_FR[value] ?? value}
-                                        size="small"
-                                    />
-                                ))}
-                            </Box>
-                        )}
-                    >
-                        {AVAILABLE_DOMAINS.map((domain) => (
-                            <MenuItem key={domain} value={domain}>
-                                {DOMAIN_LABELS_FR[domain] ?? domain}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-
-                <TextField
-                    label="Instructions supplémentaires"
-                    placeholder="Ex : Réponds toujours en français, reste concise, donne 1 exemple concret..."
-                    fullWidth
-                    size="small"
-                    multiline
-                    minRows={3}
-                    value={config.extraInstructions}
-                    onChange={handleExtraInstructionsChange}
-                />
-            </Box>
-
-              {/* Col 3 : Style */}
-            <Box sx={columnWithSeparator}>
-                <Typography variant="overline" sx={columnTitleSx}>
-                    Style
-                </Typography>
-
-                <Box sx={{ mb: 2 }}>
-                    <Typography variant="body2" sx={{ mb: 1, opacity: 0.8 }}>
-                        Ton
+            <Box
+                sx={{
+                    display: "grid",
+                    gap: 3,
+                    gridTemplateColumns: {
+                        xs: "1fr",
+                        md: "0.8fr 1fr 1.2fr", // Identity | Domains & Rules | Style
+                    },
+                }}
+            >
+                {/* Col 1 : Identity */}
+                <Box sx={columnBoxBase}>
+                    <Typography variant="overline" sx={columnTitleSx}>
+                        Identité
                     </Typography>
-                    <ToneSelector
-                        value={config.tone}
-                        onChange={(tone) => updateAgentConfig({ tone })}
+
+                    <TextField
+                        label="Nom"
+                        fullWidth
+                        size="small"
+                        value={config.name}
+                        onChange={handleNameChange}
+                        sx={{ mb: 2 }}
+                    />
+
+                    <TextField
+                        label="Rôle / persona"
+                        fullWidth
+                        size="small"
+                        value={config.role}
+                        onChange={handleRoleChange}
+                        helperText="Ex : Custom AI Agent, Coach Agile, Mentor Data..."
                     />
                 </Box>
 
-                <Box>
-                    <Typography variant="body2" sx={{ mb: 1, opacity: 0.8 }}>
-                        Niveau d’expertise
+
+
+                {/* Col 2 : Domains & Rules */}
+                <Box sx={columnWithSeparator}>
+                    <Typography variant="overline" sx={columnTitleSx}>
+                        Domaines & règles
                     </Typography>
-                    <LevelSelector
-                        value={config.level}
-                        onChange={(level) => updateAgentConfig({ level })}
+
+                    <FormControl fullWidth size="small" sx={{ mb: 2 }}>
+                        <InputLabel id="agent-domains-label">Domaines</InputLabel>
+                        <Select
+                            labelId="agent-domains-label"
+                            multiple
+                            value={config.domains}
+                            onChange={handleDomainsChange}
+                            input={<OutlinedInput label="Domaines" />}
+                            renderValue={(selected) => (
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        flexWrap: "wrap",
+                                        gap: "6px",
+                                        rowGap: "6px",
+                                    }}
+                                >
+                                    {selected.map((value) => (
+                                        <Chip
+                                            key={value}
+                                            label={DOMAIN_LABELS_FR[value] ?? value}
+                                            size="small"
+                                        />
+                                    ))}
+                                </Box>
+                            )}
+                        >
+                            {AVAILABLE_DOMAINS.map((domain) => (
+                                <MenuItem key={domain} value={domain}>
+                                    {DOMAIN_LABELS_FR[domain] ?? domain}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
+                    <TextField
+                        label="Instructions supplémentaires"
+                        placeholder="Ex : Réponds toujours en français, reste concise, donne 1 exemple concret..."
+                        fullWidth
+                        size="small"
+                        multiline
+                        minRows={3}
+                        value={config.extraInstructions}
+                        onChange={handleExtraInstructionsChange}
                     />
                 </Box>
+
+                {/* Col 3 : Style */}
+                <Box sx={columnWithSeparator}>
+                    <Typography variant="overline" sx={columnTitleSx}>
+                        Style
+                    </Typography>
+
+                    <Box sx={{ mb: 2 }}>
+                        <Typography variant="body2" sx={{ mb: 1, opacity: 0.8 }}>
+                            Ton
+                        </Typography>
+                        <ToneSelector
+                            value={config.tone}
+                            onChange={(tone) => updateAgentConfig({ tone })}
+                        />
+                    </Box>
+
+                    <Box>
+                        <Typography variant="body2" sx={{ mb: 1, opacity: 0.8 }}>
+                            Niveau d’expertise
+                        </Typography>
+                        <LevelSelector
+                            value={config.level}
+                            onChange={(level) => updateAgentConfig({ level })}
+                        />
+                    </Box>
+                </Box>
             </Box>
-        </Box>
+        </SectionCard>
     );
 }

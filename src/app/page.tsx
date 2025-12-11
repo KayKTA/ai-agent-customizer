@@ -19,7 +19,6 @@ import AgentInsightsCard from "@/components/agent/AgentInsightsCard";
 import HeroSection from "@/components/layout/HeroSection";
 
 export default function HomePage() {
-    const { resetChat } = useAgentStore();
 
     const scrollToConfig = () => {
         const el = document.getElementById("agent-config");
@@ -28,15 +27,9 @@ export default function HomePage() {
     return (
         <>
             <HeroSection onScrollToConfig={scrollToConfig} />
-            <Container maxWidth="xl" sx={{ py: 6 }}>
+            <Container maxWidth="lg" sx={{ py: 6 }}>
                 <Box sx={{ mb: 4 }} id="agent-config">
-                    <SectionCard
-                        icon={<SettingsSuggestIcon />}
-                        title="Configuration de l’agent"
-                        subtitle="Définis rapidement l’identité, le style et le périmètre de ton agent IA."
-                    >
-                        <AgentConfigForm />
-                    </SectionCard>
+                    <AgentConfigForm />
                 </Box>
 
                 <Grid container spacing={3}>
@@ -44,20 +37,7 @@ export default function HomePage() {
                         <AgentInsightsCard />
                     </Grid>
                     <Grid size={{ xs: 12, md: 6 }}>
-                        <SectionCard
-                            title="Playground"
-                            subtitle="Teste l'agent avec de vraies questions."
-                            icon={<MessageRounded />}
-                            action={
-                                <Tooltip title="Réinitialiser la conversation">
-                                    <IconButton size="small" onClick={resetChat}>
-                                        <RestartAltIcon fontSize="small" />
-                                    </IconButton>
-                                </Tooltip>
-                            }
-                        >
-                            <ChatWindow />
-                        </SectionCard>
+                        <ChatWindow />
                     </Grid>
                 </Grid>
             </Container>
