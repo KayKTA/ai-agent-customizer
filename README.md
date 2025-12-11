@@ -1,36 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 AI Agent Customizer
 
-## Getting Started
+A lightweight and visual tool to **design, configure, and test a conversational AI agent** before integrating it into your applications (Slack bot, internal tool, product assistant, etc.).
 
-First, run the development server:
+Users can define:
+
+* the agent’s identity (name, role)
+* its communication style (tone, expertise level)
+* domains of expertise
+* extra behavioral rules
+* an auto-generated **system prompt**
+* a **behavior summary**
+* a **playground** to test the agent
+
+---
+
+## 🌟 Screenshots
+
+### 🔹 Hero & General Layout
+
+![Hero Screenshot](/screenshots/hero.png)
+
+### 🔹 Agent Configuration Form (3 columns)
+
+![Agent Config Form](/screenshots/agent-config-form.png)
+
+### 🔹 Prompt & Summary Preview
+
+![Agent Insights](/screenshots/agent-insights.png)
+
+### 🔹 Playground
+
+![Playground](/screenshots/playground.png)
+
+---
+
+## ✨ Features
+
+* 🎛️ **Three-column configuration form**: Identity, Style, Domains & Rules
+* 🧾 **Automatic system prompt generation**
+* 📄 **Human-readable agent summary**
+* 💬 **Playground** to test the agent
+* 📚 **Storybook** documenting all UI components
+* 🧩 **Unit tests (Vitest)** for prompt + demo conversation logic
+
+---
+
+## 🛠 Tech Stack
+
+* **Next.js 16 (App Router)**
+* **TypeScript**
+* **MUI** Design System
+* **Zustand** for global state
+* **Zod** for schema validation
+* **Vitest** for unit testing
+* **Storybook** for UI documentation
+
+---
+
+## 🚀 Installation
 
 ```bash
+git clone <your-repo>
+cd ai-agent-customizer
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔐 Optional: enable real AI mode (OpenAI API)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file:
 
-## Learn More
+```
+OPENAI_API_KEY=sk-...
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧪 Tests
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Run unit tests:
 
-## Deploy on Vercel
+```bash
+npm test
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Tests cover:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* system prompt generation
+
+---
+
+## 📚 Storybook
+
+Run Storybook:
+
+```bash
+npm run storybook
+```
+
+Components documented:
+
+* AgentConfigForm
+* ToneSelector
+* LevelSelector
+* AgentInsightsCard
+* ChatWindow
+* SectionCard
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+  app/
+  components/
+  hooks/
+  store/
+  lib/
+  config/
+  types/
+```
+
+---
+
+## 🎯 Why this project?
+
+This project demonstrates:
+
+* the ability to design **usable AI tooling**
+* structured prompt engineering
+* building clean, modular UI components ready for Storybook
+* managing global state and validation
+* testing AI-related logic safely
