@@ -24,7 +24,7 @@ const meta: Meta<typeof AgentConfigForm> = {
     decorators: [
         (Story) => (
             <AgentConfigDecorator>
-                <div style={{ maxWidth: 420 }}>
+                <div style={{ maxWidth: 1000 }}>
                     <Story />
                 </div>
             </AgentConfigDecorator>
