@@ -18,19 +18,19 @@ Users can define:
 
 ### 🔹 Hero & General Layout
 
-![Hero Screenshot](/screenshots/hero.png)
+![Hero Screenshot](/public/screenshots/hero.png)
 
 ### 🔹 Agent Configuration Form (3 columns)
 
-![Agent Config Form](/screenshots/agent-config-form.png)
+![Agent Config Form](/public/screenshots/agent-config-form.png)
 
 ### 🔹 Prompt & Summary Preview
 
-![Agent Insights](/screenshots/agent-insights.png)
+![Agent Insights](/public/screenshots/agent-insights.png)
 
 ### 🔹 Playground
 
-![Playground](/screenshots/playground.png)
+![Playground](/public/screenshots/playground.png)
 
 ---
 
