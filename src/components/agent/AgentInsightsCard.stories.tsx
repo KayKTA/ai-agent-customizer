@@ -41,49 +41,39 @@ const DEFAULT_PRESET: AgentConfig = {
     ...DEFAULT_AGENT_CONFIG,
 };
 
-const AGILE_PRESET: AgentConfig = {
+const FASHION_PRESET: AgentConfig = {
     ...DEFAULT_AGENT_CONFIG,
-    name: "Coach Agile IA",
-    role: "Coach Agile et SAFe pour équipes tech et produit",
-    tone: "empathetic",
-    level: "senior",
-    domains: ["agile / SAFe", "project management"],
-    extraInstructions:
-        "Réponds en français, donne des exemples concrets et propose toujours une action simple à mettre en place dès aujourd’hui.",
-};
-
-const WEBDEV_PRESET: AgentConfig = {
-    ...DEFAULT_AGENT_CONFIG,
-    name: "Mentor Dev Web",
-    role: "Mentor en développement web (React, Next.js, TypeScript)",
+    name: "Styliste Virtuel",
+    role: "Un assistant IA expert en mode et tendances vestimentaires.",
     tone: "friendly",
-    level: "senior",
-    domains: ["web development"],
+    level: "mid",
+    domains: ["fashion"],
     extraInstructions:
-        "Explique les concepts avec des analogies simples, propose des snippets de code et signale les bonnes pratiques sans être condescendant.",
+        "Fournis des conseils de mode personnalisés en fonction des préférences et du style de l'utilisateur. Sois à la fois tendance et pratique.",
 };
 
-const DATA_AI_PRESET: AgentConfig = {
+const TECH_SUPPORT_PRESET: AgentConfig = {
     ...DEFAULT_AGENT_CONFIG,
-    name: "Coach Data & IA",
-    role: "Assistant pour comprendre les concepts Data & IA et analyser des résultats",
+    name: "Support Tech IA",
+    role: "Un agent conversationnel spécialisé dans l'assistance technique pour les produits électroniques grand public.",
     tone: "professional",
-    level: "mid",
-    domains: ["data & AI"],
+    level: "expert",
+    domains: ["software_development"],
     extraInstructions:
-        "Commence par une explication simple, puis détaille les notions avancées. Propose des visualisations ou tableaux quand c’est utile.",
+        "Aide les utilisateurs à résoudre des problèmes techniques liés à leurs appareils électroniques. Fournis des instructions claires et des solutions efficaces.",
 };
 
 const CAREER_COACH_PRESET: AgentConfig = {
     ...DEFAULT_AGENT_CONFIG,
-    name: "Coach Carrière IA",
-    role: "Coach pour la réflexion carrière, CV et préparation d’entretiens",
+    name: "Coach de Carrière",
+    role: "Un assistant IA dédié à l'orientation professionnelle et au développement de carrière.",
     tone: "empathetic",
     level: "senior",
-    domains: ["career coaching"],
+    domains: ["career", "general"],
     extraInstructions:
-        "Reste bienveillant, évite les jugements. Propose des pistes concrètes, des questions de réflexion et des mini-plans d’action.",
+        "Guide les utilisateurs dans leur parcours professionnel en offrant des conseils sur la rédaction de CV, la préparation aux entretiens et le développement des compétences.",
 };
+
 
 // ---------- STORIES ---------- //
 
@@ -100,11 +90,11 @@ export const Default: Story = {
     ],
 };
 
-export const AgileCoachAgent: Story = {
-    name: "Coach Agile / SAFe",
+export const FashionStylistAgent: Story = {
+    name: "Styliste de Mode",
     decorators: [
         (Story) => (
-            <ConfigPresetProvider preset={AGILE_PRESET}>
+            <ConfigPresetProvider preset={FASHION_PRESET}>
                 <div style={{ maxWidth: 720, margin: "0 auto" }}>
                     <Story />
                 </div>
@@ -113,24 +103,11 @@ export const AgileCoachAgent: Story = {
     ],
 };
 
-export const WebDevMentorAgent: Story = {
-    name: "Mentor Dév Web",
+export const TechSupportAgent: Story = {
+    name: "Support Technique",
     decorators: [
         (Story) => (
-            <ConfigPresetProvider preset={WEBDEV_PRESET}>
-                <div style={{ maxWidth: 720, margin: "0 auto" }}>
-                    <Story />
-                </div>
-            </ConfigPresetProvider>
-        ),
-    ],
-};
-
-export const DataAiCoachAgent: Story = {
-    name: "Coach Data & IA",
-    decorators: [
-        (Story) => (
-            <ConfigPresetProvider preset={DATA_AI_PRESET}>
+            <ConfigPresetProvider preset={TECH_SUPPORT_PRESET}>
                 <div style={{ maxWidth: 720, margin: "0 auto" }}>
                     <Story />
                 </div>
@@ -140,7 +117,7 @@ export const DataAiCoachAgent: Story = {
 };
 
 export const CareerCoachAgent: Story = {
-    name: "Coach Carrière",
+    name: "Coach de Carrière",
     decorators: [
         (Story) => (
             <ConfigPresetProvider preset={CAREER_COACH_PRESET}>

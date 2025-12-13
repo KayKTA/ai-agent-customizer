@@ -4,7 +4,6 @@ export const TONES = [
     "friendly",
     "professional",
     "empathetic",
-    // "direct",
     "playful",
 ] as const;
 export type Tone = (typeof TONES)[number];
@@ -13,7 +12,6 @@ export const TONE_LABELS_FR: Record<Tone, string> = {
     friendly: "Amical",
     professional: "Professionnel",
     empathetic: "Empathique",
-    // direct: "Direct",
     playful: "Ludique",
 };
 
@@ -31,31 +29,42 @@ export const LEVEL_LABELS_FR: Record<Level, string> = {
 
 export const AVAILABLE_DOMAINS = [
     "general",
-    "web development",
-    "data & AI",
-    "project management",
-    "agile / SAFe",
-    "career coaching",
+    "software_development",
+    "data",
+    "gaming",
+    "fashion",
+    "project",
+    "career",
 ] as const;
 export type Domain = (typeof AVAILABLE_DOMAINS)[number];
 
-export const DOMAIN_LABELS_FR: Record<Domain, string> = {
+export const DOMAIN_LABELS_FR = {
     general: "Général",
-    "web development": "Développement web",
-    "data & AI": "Data & IA",
-    "project management": "Gestion de projet",
-    "agile / SAFe": "Agile / SAFe",
-    "career coaching": "Coaching carrière",
+    software_development: "Développement logiciel",
+    data: "Data & Intelligence Artificielle",
+    gaming: "Gaming / Jeux vidéo",
+    fashion: "Mode & Lifestyle",
+    project: "Gestion de projet & produit",
+    career: "Coaching carrière",
 };
 
-export const DOMAIN_USE_CASES: Record<Domain, string> = {
+
+export const DOMAIN_USE_CASES = {
     general: "Assistant polyvalent pour des questions générales.",
-    "web development": "Copilote ou mentor pour développeurs web.",
-    "data & AI": "Support pour l'analyse de données et l'explication de concepts IA.",
-    "project management": "Aide à l'organisation, à la priorisation et au suivi de projets.",
-    "agile / SAFe": "Coach pour accompagner les équipes dans les pratiques Agile et SAFe.",
-    "career coaching": "Assistant pour la réflexion carrière, CV, entretiens et reconversion.",
+    software_development:
+        "Assistant technique pour le code, l’architecture, le debug et les bonnes pratiques.",
+    data:
+        "Assistant pédagogique pour expliquer les concepts Data, IA, LLM, RAG, biais et usages concrets.",
+    gaming:
+        "Assistant spécialisé jeux vidéo : mécaniques, stratégies, game design, univers.",
+    fashion:
+        "Conseiller mode : tendances, styles, associations, marques et inspirations.",
+    project:
+        "Aide à la priorisation, roadmap, delivery, communication et pilotage.",
+    career:
+        "Assistant pour CV, entretiens, reconversion et stratégie de carrière.",
 };
+
 
 // 3) EXEMPLES DE RÉPONSES ===============================================
 
@@ -68,42 +77,42 @@ export const EXAMPLE_SNIPPETS: Record<
         friendly: "Super question ! Donne-moi un peu de contexte et je t'explique tout pas à pas 🙂",
         professional: "Je vais structurer la réponse en plusieurs points pour rester clair et efficace.",
         empathetic: "Je comprends que ce sujet puisse sembler complexe, je vais te le rendre aussi simple que possible.",
-        // direct: "Voici l'essentiel à retenir : je vais droit au but, sans blabla inutile.",
         playful: "On s'attaque à ça ensemble ? Promis, on va rendre ça beaucoup plus fun 😄",
     },
-    "web development": {
+    software_development: {
         friendly: "On peut regarder ton code ensemble et je t'explique ce qui bloque, étape par étape.",
         professional: "Voici une approche recommandée pour structurer votre composant et éviter cette erreur.",
         empathetic: "C'est normal de se sentir un peu perdu avec ce genre de bug, on va le décomposer calmement.",
-        // direct: "Le problème vient de là. On le corrige en modifiant ces lignes de code.",
         playful: "Ton code a juste besoin d'un petit power-up 💪, je te montre comment faire.",
     },
-    "data & AI": {
-        friendly: "Je peux t'aider à comprendre ce que veulent dire ces métriques et comment les améliorer.",
-        professional: "Je vais analyser ces données et vous proposer une interprétation claire des résultats.",
-        empathetic: "Les notions d'IA peuvent être intimidantes, je vais les rendre abordables, une brique à la fois.",
-        // direct: "Voici les insights principaux qui ressortent de vos données, sans détour.",
-        playful: "On va dompter ces données ensemble, comme un vrai data wizard 🪄",
+    data: {
+        friendly: "Je vais t’expliquer ce concept Data/IA simplement, avec un exemple concret.",
+        professional: "Je vais définir le concept, expliquer son fonctionnement et ses cas d’usage.",
+        empathetic: "C’est normal que ces notions soient floues au début, on va les clarifier pas à pas.",
+        playful: "On va rendre l’IA moins mystérieuse, promis 🧠✨",
     },
-    "project management": {
-        friendly: "On peut clarifier tes priorités et organiser ton backlog tranquillement 😉",
-        professional: "Je vais structurer un plan d'action priorisé pour sécuriser l'avancement de votre projet.",
-        empathetic: "C'est normal de se sentir débordé par un projet, on va remettre de l'ordre ensemble.",
-        // direct: "Voici ce qui doit être fait maintenant, ce qui peut attendre, et ce qu'il faut supprimer.",
-        playful: "On transforme ton projet en level game : objectifs, quêtes, et prochaines actions 🎯",
+    gaming: {
+        friendly: "Tu veux parler gameplay, stratégie ou univers ? Je t’aide.",
+        professional: "Je vais analyser les mécaniques de jeu et proposer une approche structurée.",
+        empathetic: "Si le jeu te paraît complexe, on va le décortiquer ensemble.",
+        playful: "Ready player one ? 🎮 On plonge dedans.",
     },
-    "agile / SAFe": {
-        friendly: "Je peux t'expliquer les cérémonies Agile et comment les adapter à ton équipe sans prise de tête.",
-        professional: "Je vais vous proposer des ajustements concrets pour améliorer vos rituels Agile / SAFe.",
-        empathetic: "Changer de façon de travailler n'est jamais simple, je t'accompagne étape par étape.",
-        // direct: "Voici ce qui ne fonctionne pas dans votre pratique actuelle, et comment l'améliorer.",
-        playful: "On va remettre un peu de vie dans vos sprints, sans perdre en efficacité 🚀",
+    fashion: {
+        friendly: "Parle-moi de ton style et je t’aide à trouver des idées sympas.",
+        professional: "Je vais analyser les tendances actuelles et proposer des associations adaptées.",
+        empathetic: "Trouver son style peut être un défi, on va explorer ça ensemble.",
+        playful: "On va pimper ton look avec des idées fun et originales 👗✨",
     },
-    "career coaching": {
-        friendly: "Parle-moi de ton parcours et je t'aide à mettre en valeur ce que tu sais déjà faire.",
-        professional: "Je vais analyser votre profil et vous proposer des axes concrets d'amélioration.",
-        empathetic: "Les transitions de carrière peuvent être stressantes, on va avancer à ton rythme.",
-        // direct: "Voici les points à renforcer en priorité pour atteindre ton objectif.",
-        playful: "On traite ta carrière comme un RPG : compétences, points forts, et prochaines quêtes ✨",
+    project: {
+        friendly: "Dis-moi où tu en es dans ton projet et je t’aide à y voir plus clair.",
+        professional: "Je vais structurer les priorités et proposer une roadmap claire.",
+        empathetic: "Gérer un projet peut être stressant, on va simplifier ça ensemble.",
+        playful: "On va transformer ta gestion de projet en une aventure épique 🚀",
+    },
+    career: {
+        friendly: "Parle-moi de tes objectifs et je t’aide à avancer pas à pas.",
+        professional: "Je vais analyser ton profil et proposer des stratégies concrètes.",
+        empathetic: "Penser à sa carrière peut être intimidant, on va le faire ensemble.",
+        playful: "On va booster ta carrière avec des idées fraîches et motivantes 🌟",
     },
 };
