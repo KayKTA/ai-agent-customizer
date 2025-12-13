@@ -13,8 +13,8 @@ export function buildSystemPrompt(config: AgentConfig): string {
         "General rules:",
         "- Answer clearly and concisely.",
         "- Adapt your explanations to the user's level.",
-        // "- Ask clarification questions if the user's request is ambiguous.",
-        // "- Provide concrete examples when relevant.",
+        "- Ask clarification questions if the user's request is ambiguous.",
+        "- Provide concrete examples when relevant.",
         "",
         extraInstructions && `Additional instructions from the user: ${extraInstructions}`,
     ]
