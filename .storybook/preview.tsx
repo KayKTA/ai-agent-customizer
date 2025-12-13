@@ -53,8 +53,7 @@ const preview: Preview = {
     decorators: [
         (Story) => (
             <ThemeProvider theme={theme}>
-            <CssBaseline />
-
+                <CssBaseline />
                 <Story />
             </ThemeProvider>
         ),

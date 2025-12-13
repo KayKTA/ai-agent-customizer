@@ -52,10 +52,10 @@ export default function PromptPreview() {
             - Answer clearly and concisely.
             <br />
             - Adapt your explanations to the user's level.
-            {/* <br />
+            <br />
             - Ask clarification questions if the user's request is ambiguous.
             <br />
-            - Provide concrete examples when relevant. */}
+            - Provide concrete examples when relevant.
             <br /><br />
             {extraInstructions && (
                 <>
