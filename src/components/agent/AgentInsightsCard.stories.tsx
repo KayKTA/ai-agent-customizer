@@ -26,6 +26,7 @@ function ConfigPresetProvider({
 const meta: Meta<typeof AgentInsightsCard> = {
     title: "Agent/AgentInsightsCard",
     component: AgentInsightsCard,
+    tags: ["autodocs"],
     parameters: {
         layout: "centered",
     },

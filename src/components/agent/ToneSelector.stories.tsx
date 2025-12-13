@@ -6,6 +6,7 @@ import { Tone, TONE_LABELS_FR } from "@/config/agentConfig";
 const meta: Meta<typeof ToneSelector> = {
     title: "Agent/ToneSelector",
     component: ToneSelector,
+    tags: ["autodocs"],
     parameters: {
         layout: "centered",
     },

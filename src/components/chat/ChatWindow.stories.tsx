@@ -59,6 +59,7 @@ function ChatStoryProvider({ children }: { children: ReactNode }) {
 const meta: Meta<typeof ChatWindow> = {
     title: "Agent/ChatWindow",
     component: ChatWindow,
+    tags: ["autodocs"],
     parameters: {
         layout: "centered",
     },

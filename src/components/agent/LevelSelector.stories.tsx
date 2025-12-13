@@ -6,6 +6,7 @@ import { Level, LEVEL_LABELS_FR } from "@/config/agentConfig";
 const meta: Meta<typeof LevelSelector> = {
     title: "Agent/LevelSelector",
     component: LevelSelector,
+    tags: ["autodocs"],
     parameters: {
         layout: "centered",
     },

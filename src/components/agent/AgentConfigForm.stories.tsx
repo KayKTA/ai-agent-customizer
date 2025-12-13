@@ -21,6 +21,7 @@ function AgentConfigDecorator({ children }: { children: ReactNode }) {
 const meta: Meta<typeof AgentConfigForm> = {
     title: "Agent/AgentConfigForm",
     component: AgentConfigForm,
+    tags: ["autodocs"],
     decorators: [
         (Story) => (
             <AgentConfigDecorator>

@@ -6,6 +6,7 @@ import { Typography } from "@mui/material";
 const meta: Meta<typeof SectionCard> = {
     title: "Layout/SectionCard",
     component: SectionCard,
+    tags: ["autodocs"],
     parameters: {
         layout: "centered",
     },
